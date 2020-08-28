@@ -1,43 +1,48 @@
-//step1 create objects
+//step 1 create object experss
 const express = require('express');
 const app = express();
 
-const port = process.env.port || 8000;
-//step 2 routing
+const port = process.env.PORT || 8000;
 
-//IT students
+// step 2 routing
+
+//IT student
 const itStudents = [
-    {id:61,name : 'Suchada IT'}
-    ,{id:62,name :'Narawit IT'}
+    {id:61,name:'Chotdecha IT'},
+    {id:62,name:'Suchada IT'}
 ];
-const CeStudents = [
-    {id:71,name : 'Chonticha CE'}
-    ,{id:72,name :'Kiattiphom CE'}
+//CE student
+const ceStudents = [
+    {id:71,name:'Narawit CE'},
+    {id:72,name:'Chonticha CE'}
 ];
+
 //majo
 const allMajors = {
-    'it' :itStudents,
-    'ce' :CeStudents
+    'it':itStudents,
+    'ce':ceStudents
 };
-//rout
+
+//route
 app.get('/api/:major',(req,res,next)=>{
-    const major = req.params.major.toLowerCase();
-    if(major=='it'){
-        const JsonString = JSON.stringify(itStudents);
-        req.myobj = JsonString;
+    const major = req.params.major.toLocaleLowerCase();
+    if (major == 'it'){
+        const jsonString = JSON.stringify(itStudents);
+        req.myobj = jsonString;
         next();
-    }else if(major == 'ce'){
-        const JsonString= JSON.stringify(CeStudents);
-        req.myobj = JsonString
+    }else if (major=='ce'){
+        const jsonString = JSON.stringify(ceStudents);
+        req.myobj = jsonString;
         next();
     }else{
         res.send('Wrong parameter');
     }
 },(req,res)=>{
-    req.myobj += 'End of Data';
+    req.myobj += ' End of Data';
     res.send(req.myobj);
 });
- //// step  3 listen
- app.listen(port,'127.0.0.1',()=>{
+
+//step 3
+app.listen(port,'127.0.0.1',()=>{
     console.log(`Listening on port ${port}`);
 });

@@ -20,7 +20,7 @@ const allMajors = {
     'ce' :CeStudents
 };
 //rout
-app.get('/api/:id/:major',(req,res)=>{
+app.get('/api/:id/:major',(req,res,next)=>{
 const id= req.params.id;
 const major= req.params.major.toLowerCase();
 if(allMajors[major]){
